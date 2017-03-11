@@ -1,20 +1,15 @@
 = J.A.R.V.I.S
 
-SpringBoot based authentication server built with OAuth 2.0
+SpringBoot based authentication server supporting OAuth 2.0
 
 Supported Grant types
 
 
-.Grant Types
-|===
-|Header 1
 
-|Column 1, row 1
-password
-|Column 1, row 2
-client_credentials
-|Column 1, row 3
-refresh_token
-|Column 1, row 4
-authorization_code
+|===
+|Grant Types
+|password
+|client_credentials
+|refresh_token
+|authorization_code
 |===
