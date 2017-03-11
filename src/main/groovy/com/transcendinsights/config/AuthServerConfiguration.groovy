@@ -1,6 +1,7 @@
 package com.transcendinsights.config
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
@@ -20,6 +21,12 @@ class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
   @Autowired
   AuthenticationManager authenticationManager
 
+  @Value('${service1.client-id}')
+  String service1ClientId
+
+  @Value('${service1.client-secret}')
+  String service1Secret
+
   @Override
   void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     endpoints.authenticationManager(authenticationManager);
@@ -28,9 +35,9 @@ class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
   @Override
   void configure(ClientDetailsServiceConfigurer clients) {
     clients.inMemory()
-    .withClient('e167ea5c-c36a-4c24-9c8e-7986625c1c88')
+    .withClient(service1ClientId)
     .authorizedGrantTypes('authorization_code','refresh_token','password','client_credentials')
     .scopes('default')
-    .secret('2ae200ba-3d1a-419f-913c-5faf09a4df76')
+    .secret(service1Secret)
   }
 }
