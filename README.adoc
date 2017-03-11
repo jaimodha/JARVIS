@@ -4,7 +4,7 @@ SpringBoot based authentication server supporting OAuth 2.0
 
 Supported Grant types
 
-*password
-*client_credentials
-*refresh_token
-*authorization_code
+* password
+* client_credentials
+* refresh_token
+* authorization_code
