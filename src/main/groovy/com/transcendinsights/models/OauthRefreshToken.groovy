@@ -5,6 +5,7 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.Lob
 import javax.persistence.Table
 
 /**
@@ -24,9 +25,11 @@ class OauthRefreshToken {
     String tokenId
 
     @Column(name = 'token')
-    byte[] token
+    @Lob
+    String token
 
     @Column(name = 'authentication')
-    byte[] authentication
+    @Lob
+    String authentication
 
 }

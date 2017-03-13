@@ -3,6 +3,7 @@ package com.transcendinsights.models
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Lob
 import javax.persistence.Table
 
 /**
@@ -18,7 +19,8 @@ class OauthAccessToken {
     String tokenId
 
     @Column(name = 'token')
-    byte[] token
+    @Lob
+    String token
 
     @Id
     @Column(name = 'authentication_id', nullable = false)
@@ -27,8 +29,12 @@ class OauthAccessToken {
     @Column(name = 'user_name')
     String userName
 
+    @Column(name = 'client_id')
+    String clientId
+
     @Column(name = 'authentication')
-    byte[] authentication
+    @Lob
+    String authentication
 
     @Column(name = 'refresh_token')
     String refreshToken

@@ -19,8 +19,6 @@ class OauthClientDetails {
 
     @Id
     @Column(name = 'client_id')
-    @GeneratedValue(generator = 'uuid')
-    @GenericGenerator(name = 'uuid', strategy = 'uuid2')
     String clientId
 
     @Column(name = 'resource_ids')

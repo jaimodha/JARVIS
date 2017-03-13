@@ -10,6 +10,9 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain
+import org.springframework.security.oauth2.provider.token.TokenStore
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore
 
 import javax.sql.DataSource
 
@@ -33,16 +36,11 @@ class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
   @Override
   void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.authenticationManager(authenticationManager);
+    endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager)
   }
 
   @Override
   void configure(ClientDetailsServiceConfigurer clients) {
-//    clients.inMemory()
-//    .withClient(service1ClientId)
-//    .authorizedGrantTypes('authorization_code','refresh_token','password','client_credentials')
-//    .scopes('default')
-//    .secret(service1Secret)
     clients.jdbc(dataSource())
   }
 
@@ -53,5 +51,10 @@ class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
     dataSource.setUsername('root')
     dataSource.setPassword('password')
     dataSource
+  }
+
+  @Bean
+  TokenStore tokenStore() {
+     new JdbcTokenStore(dataSource());
   }
 }
